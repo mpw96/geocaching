@@ -1,5 +1,6 @@
-package gc2f1mv;
+package mpw96;
 
+import mpw96.Board;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;

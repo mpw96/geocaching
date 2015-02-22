@@ -1,6 +1,4 @@
-package gc2f1mv;
-
-import gc2f1mv.Tree.PiecePosition;
+package mpw96;
 
 import java.awt.Color;
 import java.awt.Container;
@@ -11,6 +9,8 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
+
+import mpw96.Tree.PiecePosition;
 
 public class GraphicSolutionPresenter extends JFrame implements
 		SolutionPresenter {

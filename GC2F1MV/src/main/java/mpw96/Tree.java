@@ -1,17 +1,28 @@
-package gc2f1mv;
+package mpw96;
 
 public class Tree {
 
 	public static void main(String[] args) {
 		
-		new Tree().go();
+		Board board = new Board();
+		
+		if( args[0].equals("text")) {
+			new Tree(board, new TextSolutionPresenter(board)).go();
+		}
+		else {
+			new Tree(board, new GraphicSolutionPresenter(board)).go();
+		}
 	}
 
-	private Board board = new Board();
-	//private SolutionPresenter solutionPresenter = new TextSolutionPresenter(board);
-	private SolutionPresenter solutionPresenter = new GraphicSolutionPresenter(board);
+	private Board board;
+	private SolutionPresenter solutionPresenter;
 	
-	class PiecePosition {
+	public Tree(Board _board, SolutionPresenter _solutionPresenter) {
+		board = _board;
+		solutionPresenter = _solutionPresenter;
+	}
+	
+ 	class PiecePosition {
 
 		final private int pieceIndex;
 		

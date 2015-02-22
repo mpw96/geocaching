@@ -1,4 +1,4 @@
-package gc2f1mv;
+package mpw96;
 
 public interface SolutionPresenter {
 	

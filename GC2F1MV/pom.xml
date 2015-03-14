@@ -16,7 +16,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>gc2f1mv.Tree</mainClass>
+							<mainClass>mpw96.Tree</mainClass>
 						</manifest>
 					</archive>
 				</configuration>

@@ -6,7 +6,11 @@
 	<packaging>war</packaging>
 	<version>1.0-SNAPSHOT</version>
 	<name>GC4MAFJ</name>
-	<url>http://www.die-werners.de</url>
+        <properties>
+            <appengine.app.version>1</appengine.app.version>
+            <appengine.target.version>1.9.27</appengine.target.version>
+            <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        </properties>
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>

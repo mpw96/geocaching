@@ -9,10 +9,10 @@ tar -xvzf Acme-Chef-1.01.tar.gz
 mkdir modules
 
 pushd Acme-Chef-1.01
-perl Makefile.PL PREFIX=../modules
+perl Makefile.PL INSTALL_BASE=../modules
 make
 make install
 popd
 
-PERL5LIB=./modules/share/perl/5.20.2/ ; export PERL5LIB
+PERL5LIB=$(pwd)/modules/lib/perl5:$PERL5LIB ; export PERL5LIB
 perl chef_compile.pl

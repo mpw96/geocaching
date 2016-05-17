@@ -1,6 +1,6 @@
 #!/bin/bash
 
-rm -Acme-Chef-1.01.tar.gz
+rm -f Acme-Chef-1.01.tar.gz
 rm -rf Acme-Chef-1.01
 rm -rf modules
 

@@ -8,11 +8,13 @@ wget http://search.cpan.org/CPAN/authors/id/S/SM/SMUELLER/Acme-Chef-1.01.tar.gz
 tar -xvzf Acme-Chef-1.01.tar.gz
 mkdir modules
 
+INST=$PWD/modules
 pushd Acme-Chef-1.01
-perl Makefile.PL INSTALL_BASE=../modules
+perl Makefile.PL INSTALL_BASE=$INST
 make
+make test
 make install
 popd
 
-PERL5LIB=$(pwd)/modules/lib/perl5:$PERL5LIB ; export PERL5LIB
+PERL5LIB=$INST:$PERL5LIB ; export PERL5LIB
 perl chef_compile.pl

@@ -4,14 +4,26 @@
 	<groupId>geocaching.mpw96</groupId>
 	<artifactId>GC4MAFJ</artifactId>
 	<packaging>war</packaging>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.1-SNAPSHOT</version>
 	<name>GC4MAFJ</name>
         <properties>
-            <appengine.app.version>1</appengine.app.version>
-            <appengine.target.version>1.9.27</appengine.target.version>
+            <maven.compiler.source>1.8</maven.compiler.source>
+            <maven.compiler.target>1.8</maven.compiler.target>
             <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+            <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+            <maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
+            <archiveClasses>true</archiveClasses>
+            <failOnMissingWebXml>false</failOnMissingWebXml>
+            <appengine.maven.plugin>1.3.2</appengine.maven.plugin>
+            <jetty.maven.plugin>9.4.3.v20170317</jetty.maven.plugin>
         </properties>
 	<dependencies>
+                <dependency>
+                        <groupId>com.google.appengine</groupId>
+                        <artifactId>appengine-api-1.0-sdk</artifactId>
+                        <version>1.9.59</version>
+                </dependency>
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -31,21 +43,23 @@
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
-			<version>3.0.1</version>
+			<version>3.1.0</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.apache.tomcat.maven</groupId>
-				<artifactId>tomcat7-maven-plugin</artifactId>
-				<version>2.2</version>
-				<configuration>
-					<username>maven</username>  
-  					<password>maven</password> 
-				</configuration>
-			</plugin>
+                    <plugin>
+                        <groupId>org.eclipse.jetty</groupId>
+                        <artifactId>jetty-maven-plugin</artifactId>
+                        <version>${jetty.maven.plugin}</version>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>com.google.cloud.tools</groupId>
+                        <artifactId>appengine-maven-plugin</artifactId>
+                        <version>${appengine.maven.plugin}</version>
+                    </plugin>
 		</plugins>
 		<finalName>GC4MAFJ</finalName>
 	</build>

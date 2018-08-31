@@ -2,11 +2,12 @@ package mpw96;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.security.Security;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -46,26 +47,29 @@ public class SecureCoordinateResponder extends HttpServlet {
 		
 		String cipherText=getCipherText(request.getParameter("public_key"));
 		
-		PrintWriter writer = response.getWriter();
-		writer.println("<html>");
+		response.setContentType("text/html");
+		ServletOutputStream writer = response.getOutputStream();
+
+		writer.println("<!DOCTYPE html>");
+        writer.println("<html>");
 		writer.println("<head>");
+		writer.println("<meta charset=\"UTF-8\">");
 		writer.println("<title>GC4MAFJ</title>");
-		
-		
 		writer.println("<style type=\"text/css\">");
 		writer.println("* {");
 		writer.println("        font-family: monospace;");
 		writer.println("}");
 		writer.println("</style>");
 		writer.println("</head>");
+
 		writer.println("<body bgcolor=\""+(null==cipherText?"red":"green")+"\">");
 		writer.println("<p>");
 		writer.println("GC4MAFJ");
 		writer.println("</p>");
 		if(null==cipherText) {
-			writer.println("<p style=\"font-size: 300%;\">");
+			writer.println("<p><font size=\"7\">");
 			writer.println("No, this did not work.");
-			writer.println("</p>");
+			writer.println("</font></p>");
 		}
 		else {
 			writer.println("<p>");
@@ -78,8 +82,54 @@ public class SecureCoordinateResponder extends HttpServlet {
 			writer.println("</p>");
 		}
 		writer.println("<img src=\""+request.getContextPath()+"/images/geocaching-logo.png\" alt=\"Geocaching\" height=\"43\" width=\"301\" />");
+        if( null != cipherText ) {
+			String clientIP = request.getHeader("X-FORWARDED-FOR");
+			if( null == clientIP ) {
+			  clientIP = request.getRemoteAddr();
+			}
+			else {
+				clientIP = clientIP.contains(",") ? clientIP.split(",")[0] : clientIP;
+			}
+			try {
+				LocationInfo loci = new LocationInfo(clientIP, "de");
+				String flag = loci.getFlag();
+				String region = loci.getRegion();
+				String city = loci.getCity();
+				writer.println("<br><br><br><br><br>");
+				writer.println("<table border=1>");
+				writer.println("<tr>");
+				writer.println("<th colspan=\"2\">This is not relevant for the cache, but just so you know what I know about you...</th>");
+				writer.println("</tr>");
+				if( null != flag ) {
+					writer.println("<tr>");
+					writer.print("<td>Your country:</td><td><font size=\"7\">");
+					writer.write(flag.getBytes());
+					writer.println("</font></td>");
+					writer.println("</tr>");
+				}
+				if( null != region ) {
+					writer.println("<tr>");
+					writer.println(String.format("<td>Your region:</td><td>%s</td>", region));
+					writer.println("</tr>");
+				}
+				if( null != city ) {
+					writer.println("<tr>");
+					writer.println(String.format("<td>Your city:</td><td>%s</td>", city));
+					writer.println("</tr>");
+				}
+				writer.println("<tr>");
+				writer.println(String.format("<td>Your IP address:</td><td>%s</td>", clientIP));
+				writer.println("</tr>");
+				writer.println("</table>");
+			}
+			catch( Exception e) {
+				writer.println("<!--");
+				e.printStackTrace(new PrintStream(writer));
+				writer.println("-->");
+			}
+		}
 		writer.println("</body>");
-		writer.close();			
+		writer.flush();
 	}
 	
 	private String getCipherText(String publicKeyString) {

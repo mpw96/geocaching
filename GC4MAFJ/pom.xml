@@ -4,7 +4,7 @@
 	<groupId>geocaching.mpw96</groupId>
 	<artifactId>GC4MAFJ</artifactId>
 	<packaging>war</packaging>
-	<version>1.1-SNAPSHOT</version>
+	<version>1.2-SNAPSHOT</version>
 	<name>GC4MAFJ</name>
         <properties>
             <maven.compiler.source>1.8</maven.compiler.source>
@@ -45,6 +45,11 @@
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.1.0</version>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>1.1.1</version>
 		</dependency>
 	</dependencies>
 	<build>

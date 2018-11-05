@@ -20,7 +20,7 @@ public class PublicKeyCreator {
 		PGPPublicKeyRingCollection pgpPub = new PGPPublicKeyRingCollection(
 				PGPUtil.getDecoderStream(pgpData), new JcaKeyFingerprintCalculator());
 
-		Iterator keyRingIter = pgpPub.getKeyRings();
+		Iterator<PGPPublicKeyRing> keyRingIter = pgpPub.getKeyRings();
 		while (keyRingIter.hasNext())
 		{
 			PGPPublicKeyRing keyRing = (PGPPublicKeyRing)keyRingIter.next();

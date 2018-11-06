@@ -90,12 +90,12 @@ public class GraphicSolutionPresenter extends JFrame implements
 
 	public void printLoopInfo(int placingPiece) {
 		drawPanel.repaint();
-//		try {
-//			Thread.sleep(30);
-//		}
-//		catch(Exception e) {
-//			e.printStackTrace();
-//		}
+		try {
+			Thread.sleep(1);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void printSolution(PiecePosition[] pp) {

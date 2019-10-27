@@ -16,5 +16,5 @@ make test
 make install
 popd
 
-PERL5LIB=$INST:$PERL5LIB ; export PERL5LIB
+PERL5LIB=$INST/lib/perl5:$PERL5LIB ; export PERL5LIB
 perl chef_compile.pl

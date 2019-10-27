@@ -4,7 +4,7 @@
 	<groupId>geocaching.mpw96</groupId>
 	<artifactId>GC4MAFJ</artifactId>
 	<packaging>war</packaging>
-	<version>1.2-SNAPSHOT</version>
+	<version>1.3-SNAPSHOT</version>
 	<name>GC4MAFJ</name>
         <properties>
             <maven.compiler.source>1.8</maven.compiler.source>

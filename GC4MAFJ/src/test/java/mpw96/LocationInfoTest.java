@@ -33,7 +33,7 @@ public class LocationInfoTest {
 
     @Test
 	public void shouldGetCountry() {
-		assertEquals("USA", s_li.getCountry());
+		assertEquals("Vereinigte Staaten", s_li.getCountry());
 	}
 
 	@Test

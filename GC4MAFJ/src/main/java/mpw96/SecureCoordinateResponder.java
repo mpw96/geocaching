@@ -1,8 +1,11 @@
 package mpw96;
 
+import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.security.Security;
 
@@ -17,8 +20,10 @@ import org.bouncycastle.openpgp.PGPPublicKey;
 
 
 public class SecureCoordinateResponder extends HttpServlet {
-	
+
 	private static final long serialVersionUID = 2L;
+	private static final String clearText_URL = "http://mpw.sabic.uberspace.de/gc4mafj_finalcoordinates.txt";
+	private static String clearText = "";
 
 	@Override
 	public void destroy() {
@@ -131,7 +136,21 @@ public class SecureCoordinateResponder extends HttpServlet {
 		writer.println("</body>");
 		writer.flush();
 	}
-	
+
+	public String loadClearText() throws IOException {
+		if(SecureCoordinateResponder.clearText.equals("")) {
+			BufferedInputStream in = new BufferedInputStream(new URL(clearText_URL).openStream());
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			byte dataBuffer[] = new byte[1024];
+			int bytesRead;
+			while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
+				baos.write(dataBuffer, 0, bytesRead);
+			}
+			SecureCoordinateResponder.clearText = baos.toString().trim();
+		}
+		return SecureCoordinateResponder.clearText;
+	}
+
 	private String getCipherText(String publicKeyString) {
 		String ciphertext = null;
 		if(null!=publicKeyString) {
@@ -139,7 +158,7 @@ public class SecureCoordinateResponder extends HttpServlet {
 				Security.addProvider(new BouncyCastleProvider());
 				PublicKeyCreator pkc = new PublicKeyCreator();
 				PGPPublicKey publicKey = pkc.createKeyFrom(new ByteArrayInputStream(publicKeyString.getBytes(StandardCharsets.UTF_8)));
-				ciphertext = new StringEncryptor().encryptString(publicKey, "N 52 25.908 E 013 18.625");
+				ciphertext = new StringEncryptor().encryptString(publicKey, loadClearText());
 			}
 			catch( Exception e) {
 			}

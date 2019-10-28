@@ -23,7 +23,6 @@ public class SecureCoordinateResponder extends HttpServlet {
 
 	private static final long serialVersionUID = 2L;
 	private static final String clearText_URL = "http://mpw.sabic.uberspace.de/gc4mafj_finalcoordinates.txt";
-	private static String clearText = "";
 
 	@Override
 	public void destroy() {
@@ -137,8 +136,8 @@ public class SecureCoordinateResponder extends HttpServlet {
 		writer.flush();
 	}
 
-	public String loadClearText() throws IOException {
-		if(SecureCoordinateResponder.clearText.equals("")) {
+	public String loadClearText() {
+		try {
 			BufferedInputStream in = new BufferedInputStream(new URL(clearText_URL).openStream());
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 			byte dataBuffer[] = new byte[1024];
@@ -146,9 +145,11 @@ public class SecureCoordinateResponder extends HttpServlet {
 			while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
 				baos.write(dataBuffer, 0, bytesRead);
 			}
-			SecureCoordinateResponder.clearText = baos.toString().trim();
+			return baos.toString().trim();
 		}
-		return SecureCoordinateResponder.clearText;
+		catch( IOException ioe ) {
+			return ioe.getMessage(); 
+		}
 	}
 
 	private String getCipherText(String publicKeyString) {

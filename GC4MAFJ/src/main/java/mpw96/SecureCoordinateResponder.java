@@ -22,7 +22,7 @@ import org.bouncycastle.openpgp.PGPPublicKey;
 public class SecureCoordinateResponder extends HttpServlet {
 
 	private static final long serialVersionUID = 2L;
-	private static final String clearText_URL = "http://mpw.sabic.uberspace.de/gc4mafj_finalcoordinates.txt";
+	private static final String clearText_URL = "http://mpw.uber.space/gc4mafj_finalcoordinates.txt";
 
 	@Override
 	public void destroy() {
@@ -49,7 +49,17 @@ public class SecureCoordinateResponder extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String cipherText=getCipherText(request.getParameter("public_key"));
+		String errorMessage = null;
+		Exception errorException = null;
+		String cipherText = null;
+		try {
+			String public_key = request.getParameter("public_key");
+			cipherText=getCipherText(public_key);
+		}
+		catch( Exception e ) {
+			errorMessage = e.getMessage();
+			errorException = e;
+		}
 		
 		response.setContentType("text/html");
 		ServletOutputStream writer = response.getOutputStream();
@@ -74,6 +84,17 @@ public class SecureCoordinateResponder extends HttpServlet {
 			writer.println("<p><font size=\"7\">");
 			writer.println("No, this did not work.");
 			writer.println("</font></p>");
+			if( null != errorMessage ) {
+			    writer.println("<p><font size=\"7\">");
+			    writer.println(errorMessage);
+				writer.println("</font></p>");
+			}
+			if( null != errorException ) {
+				//writer.println("<!--");
+				errorException.printStackTrace(new PrintStream(writer));
+				//writer.println("-->");
+
+			}
 		}
 		else {
 			writer.println("<p>");
@@ -127,9 +148,9 @@ public class SecureCoordinateResponder extends HttpServlet {
 				writer.println("</table>");
 			}
 			catch( Exception e) {
-				writer.println("<!--");
+				//writer.println("<!--");
 				e.printStackTrace(new PrintStream(writer));
-				writer.println("-->");
+				//writer.println("-->");
 			}
 		}
 		writer.println("</body>");

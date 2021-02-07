@@ -4,7 +4,7 @@
 	<groupId>geocaching.mpw96</groupId>
 	<artifactId>GC4MAFJ</artifactId>
 	<packaging>war</packaging>
-	<version>1.4-SNAPSHOT</version>
+	<version>1.5-SNAPSHOT</version>
 	<name>GC4MAFJ</name>
         <properties>
             <maven.compiler.source>1.8</maven.compiler.source>
@@ -21,7 +21,7 @@
                 <dependency>
                         <groupId>com.google.appengine</groupId>
                         <artifactId>appengine-api-1.0-sdk</artifactId>
-                        <version>1.9.59</version>
+                        <version>1.9.84</version>
                 </dependency>
 
 		<dependency>
@@ -33,12 +33,12 @@
 		<dependency>
 			<groupId>org.bouncycastle</groupId>
 			<artifactId>bcprov-jdk15on</artifactId>
-			<version>1.51</version>
+			<version>1.67</version>
 		</dependency>
 		<dependency>
 			<groupId>org.bouncycastle</groupId>
 			<artifactId>bcpg-jdk15on</artifactId>
-			<version>1.51</version>
+			<version>1.67</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>

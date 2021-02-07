@@ -34,4 +34,15 @@ public class StringEncryptorTest {
     	}
     }
 
+	@Test
+	public void shouldCreateEncryptedMessageForUnkelbavy() {
+    	try {
+    		PGPPublicKey key = new PublicKeyCreator().createKeyFrom(this.getClass().getResourceAsStream("/pubkey-unkelbaby.asc"));
+    		String ciphertext = new StringEncryptor().encryptString(key, "Hallo Welt");
+    		assertTrue(ciphertext.startsWith("-----BEGIN PGP MESSAGE-----"));
+    	} catch (Exception e) {
+    		fail(e.getMessage());
+    	}
+    }
+
 }

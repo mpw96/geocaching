@@ -4,7 +4,7 @@
 	<groupId>geocaching.mpw96</groupId>
 	<artifactId>GC4MAFJ</artifactId>
 	<packaging>war</packaging>
-	<version>1.5-SNAPSHOT</version>
+	<version>1.6-SNAPSHOT</version>
 	<name>GC4MAFJ</name>
         <properties>
             <maven.compiler.source>1.8</maven.compiler.source>
@@ -14,16 +14,9 @@
             <maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
             <archiveClasses>true</archiveClasses>
             <failOnMissingWebXml>false</failOnMissingWebXml>
-            <appengine.maven.plugin>1.3.2</appengine.maven.plugin>
             <jetty.maven.plugin>9.4.3.v20170317</jetty.maven.plugin>
         </properties>
 	<dependencies>
-                <dependency>
-                        <groupId>com.google.appengine</groupId>
-                        <artifactId>appengine-api-1.0-sdk</artifactId>
-                        <version>1.9.84</version>
-                </dependency>
-
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -31,40 +24,34 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.bouncycastle</groupId>
-			<artifactId>bcprov-jdk15on</artifactId>
-			<version>1.67</version>
-		</dependency>
-		<dependency>
-			<groupId>org.bouncycastle</groupId>
-			<artifactId>bcpg-jdk15on</artifactId>
-			<version>1.67</version>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>3.1.0</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
 			<groupId>com.googlecode.json-simple</groupId>
 			<artifactId>json-simple</artifactId>
 			<version>1.1.1</version>
 		</dependency>
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcprov-jdk15on</artifactId>
+			<version>1.70</version>
+		</dependency>
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcpg-jdk15on</artifactId>
+			<version>1.70</version>
+		</dependency>
+		<dependency>
+			<groupId>jakarta.servlet</groupId>
+			<artifactId>jakarta.servlet-api</artifactId>
+			<version>5.0.0</version>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
-                    <plugin>
-                        <groupId>org.eclipse.jetty</groupId>
-                        <artifactId>jetty-maven-plugin</artifactId>
-                        <version>${jetty.maven.plugin}</version>
-                    </plugin>
-
-                    <plugin>
-                        <groupId>com.google.cloud.tools</groupId>
-                        <artifactId>appengine-maven-plugin</artifactId>
-                        <version>${appengine.maven.plugin}</version>
-                    </plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.3.2</version>
+			</plugin>
 		</plugins>
 		<finalName>GC4MAFJ</finalName>
 	</build>

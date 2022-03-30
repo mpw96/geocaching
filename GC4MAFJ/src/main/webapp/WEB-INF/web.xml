@@ -19,6 +19,7 @@
 		<servlet-name>CoordinateResponder</servlet-name>
 		<url-pattern>/getcoords</url-pattern>
 	</servlet-mapping>
+	<!--
 	<security-constraint>
 		<web-resource-collection>
 			<web-resource-name>secure stuff</web-resource-name>
@@ -28,4 +29,5 @@
 			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
 		</user-data-constraint>
 	</security-constraint>
+	-->
 </web-app>

@@ -18,11 +18,12 @@ public class LocationInfoTest {
     @BeforeClass
 	public static void getLocationInfoObject() {
 		try {
-			s_li = new LocationInfo("134.201.250.155", "de");
+			s_li = new LocationInfo("www.geocaching.com");
 			//s_li = new LocationInfo("2003:ec:cfff:f7:3a10:d5ff:fedd:cc5c", "de");
 		}
 		catch(Exception e) {
-			// tests will fail
+            // tests will fail
+			e.printStackTrace();
 		}
 	}
 	
@@ -33,12 +34,12 @@ public class LocationInfoTest {
 
     @Test
 	public void shouldGetCountry() {
-		assertEquals("Vereinigte Staaten", s_li.getCountry());
+		assertEquals("United States", s_li.getCountry());
 	}
 
 	@Test
 	public void shouldGetRegion() {
-		assertEquals("Kalifornien", s_li.getRegion());
+		assertEquals("Washington", s_li.getRegion());
 	}
 
 	@Test

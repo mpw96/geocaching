@@ -25,10 +25,10 @@ public class PublicKeyCreator {
 		{
 			PGPPublicKeyRing keyRing = (PGPPublicKeyRing)keyRingIter.next();
 
-			Iterator keyIter = keyRing.getPublicKeys();
+			Iterator<PGPPublicKey> keyIter = keyRing.getPublicKeys();
 			while (keyIter.hasNext())
 			{
-				PGPPublicKey key = (PGPPublicKey)keyIter.next();
+				PGPPublicKey key = keyIter.next();
 
 				if (key.isEncryptionKey())
 				{
